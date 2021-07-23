@@ -196,7 +196,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "/pkmn.help/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -5394,7 +5394,7 @@ function getKeyAttributes(key) {
 
 
 // CONCATENATED MODULE: ./src/settings.ts
-const PUBLIC_PATH = "/";
+const PUBLIC_PATH = "/pkmn.help/";
 
 // CONCATENATED MODULE: ./src/getImage.ts
 
