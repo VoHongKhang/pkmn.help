@@ -2,7 +2,9 @@
 
 **👉 <https://www.pkmn.help>**
 
-**👉 This repo page <https://nguoianphu.github.io/pkmn.help>**
+**🚀 This repo page <https://nguoianphu.github.io/pkmn.help>**
+
+**🎉 FTP web page <https://play.nguoianphu.com/pkmn.help/>**
 
 # Pokémon Type Calculator
 
