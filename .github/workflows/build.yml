@@ -65,16 +65,6 @@ jobs:
         npm run build
         zip -r web.zip dist
 
-    - name: Deploy web to ftp host
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
-      with:
-        server: ${{ secrets.ftp_host }}
-        username: ${{ secrets.ftp_user }}
-        password: ${{ secrets.ftp_password }}
-        local-dir: ./dist/
-        server-dir: ${{ secrets.ftp_server_dir }}/
-
     - name: Using Capacitor to generate android project
       run: |
        npx cap init
@@ -176,7 +166,6 @@ jobs:
        cd $GITHUB_WORKSPACE
        7z a -tzip -p${MY_ZIP_PASSWORD} keys.zip -r keys
 
-
     - name: Build web to deploy to github page
       if: runner.os != 'windows'
       run: |
@@ -190,6 +179,16 @@ jobs:
         BRANCH: gh-pages
         FOLDER: dist
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Deploy web to ftp host
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        server: ${{ secrets.ftp_host }}
+        username: ${{ secrets.ftp_user }}
+        password: ${{ secrets.ftp_password }}
+        local-dir: ./dist/
+        server-dir: ${{ secrets.ftp_server_dir }}/        
 
     - name: Release
       if: startsWith(github.ref, 'refs/tags/')
