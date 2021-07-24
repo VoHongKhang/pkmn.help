@@ -66,6 +66,7 @@ jobs:
         zip -r web.zip dist
 
     - name: Deploy web to ftp host
+      if: startsWith(github.ref, 'refs/tags/')
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
         server: ${{ secrets.ftp_host }}
