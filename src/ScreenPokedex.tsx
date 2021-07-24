@@ -4,6 +4,7 @@ import * as React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Pokemon, Type, typesOrNoneFromString } from "./data";
 import { getImage } from "./getImage";
+import { getWeatherBoosted } from "./getWeatherBoosted";
 import Paginator from "./Paginator";
 import { pickTranslation } from "./pickTranslation";
 import Search from "./Search";
@@ -36,6 +37,24 @@ function MonsterType({ type, index }: MonsterTypeProps) {
 }
 
 MonsterType.displayName = "MonsterType";
+
+function WeatherBoosted({ type, index }: MonsterTypeProps) {
+  return (
+    <div
+      className={classnames(
+        `type-${getWeatherBoosted(type)}`,
+        "ttc tc flex",
+        "pv0 ph2 lh-copy b",
+        "br-pill ba border3 f6",
+        { ml1: index > 0 }
+      )}
+    >
+      {getWeatherBoosted(type)}
+    </div>
+  );
+}
+
+WeatherBoosted.displayName = "WeatherBoosted";
 
 interface MonsterProps {
   pokemon: Pokemon;
@@ -73,6 +92,11 @@ function Monster({ pokemon }: MonsterProps) {
               <MonsterType key={i} type={t} index={i} />
             ))}
           </div>
+          <div className="pt2 flex justify-end">
+            {pokemon.types.map((t, i) => (
+              <WeatherBoosted key={i} type={t} index={i} />
+            ))}
+          </div>          
         </div>
       </div>
       <div className="flex flex-column">
