@@ -5402,6 +5402,33 @@ function getImage(id) {
     return `${PUBLIC_PATH}img/${id}.png`;
 }
 
+// CONCATENATED MODULE: ./src/getWeatherBoosted.ts
+// https://niantic.helpshift.com/a/pokemon-go/?s=finding-evolving-hatching&f=weather-boosts&l=en&p=web
+const weatherBoosted = {
+    normal: 'Partly cloudy',
+    fighting: 'Cloudy',
+    flying: 'Windy',
+    poison: 'Cloudy',
+    ground: 'Sunny/Clear',
+    rock: 'Partly cloudy',
+    bug: 'Rainy',
+    ghost: 'Fog',
+    steel: 'Snow',
+    fire: 'Sunny/Clear',
+    water: 'Rainy',
+    grass: 'Sunny/Clear',
+    electric: 'Rainy',
+    psychic: 'Windy',
+    ice: 'Snow',
+    dragon: 'Windy',
+    dark: 'Fog',
+    fairy: 'Cloudy',
+    none: '',
+};
+function getWeatherBoosted(type) {
+    return weatherBoosted[type] || weatherBoosted.none;
+}
+
 // CONCATENATED MODULE: ./src/LinkButton.tsx
 
 
@@ -5815,12 +5842,17 @@ function useDebounce(value, delay, options) {
 
 
 
+
 const PAGE_SIZE = 20;
 const nbsp = "\u00a0";
 function MonsterType({ type, index }) {
     return (react["createElement"]("div", { className: classnames_default()(`type-${type} type-bg-dark`, "ttc tc flex", "pv0 ph2 lh-copy b", "br-pill ba border3 f6", { ml1: index > 0 }) }, type));
 }
 MonsterType.displayName = "MonsterType";
+function WeatherBoosted({ type, index }) {
+    return (react["createElement"]("div", { className: classnames_default()(`type-${getWeatherBoosted(type)}`, "ttc tc flex", "pv0 ph2 lh-copy b", "br-pill ba border3 f6", { ml1: index > 0 }) }, getWeatherBoosted(type)));
+}
+WeatherBoosted.displayName = "WeatherBoosted";
 function Monster({ pokemon }) {
     const displayNumber = "#" + String(pokemon.number).padStart(3, "0");
     const params = new URLSearchParams({ types: pokemon.types.join(" ") });
@@ -5836,7 +5868,8 @@ function Monster({ pokemon }) {
                 react["createElement"]("div", { className: "nv2 fg3 f5" }, formName || nbsp),
                 react["createElement"]("div", { className: "pv3 flex justify-center" },
                     react["createElement"]("img", { src: getImage(pokemon.id), role: "presentation", alt: "", className: "db img-crisp", width: 96, height: 96 })),
-                react["createElement"]("div", { className: "pt2 flex justify-end" }, pokemon.types.map((t, i) => (react["createElement"](MonsterType, { key: i, type: t, index: i })))))),
+                react["createElement"]("div", { className: "pt2 flex justify-end" }, pokemon.types.map((t, i) => (react["createElement"](MonsterType, { key: i, type: t, index: i })))),
+                react["createElement"]("div", { className: "pt2 flex justify-end" }, pokemon.types.map((t, i) => (react["createElement"](WeatherBoosted, { key: i, type: t, index: i })))))),
         react["createElement"]("div", { className: "flex flex-column" },
             react["createElement"](StatsTable, { pokemon: pokemon }),
             react["createElement"]("div", { className: "flex justify-end" },
