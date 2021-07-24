@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/wavebeem/pkmn.help/issues"
   },
-  "homepage": "https://github.com/wavebeem/pkmn.help#readme",
+  "homepage": "https://nguoianphu.github.io/pkmn.help",
   "devDependencies": {
     "@types/classnames": "^2.3.1",
     "@types/jsdom": "^16.2.13",
