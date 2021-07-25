@@ -169,10 +169,9 @@ jobs:
     - name: Build web to deploy to github page
       if: runner.os != 'windows'
       run: |
-        rm -rf dist || true
+        rm -rf dist
         cp -Rf webpack.config.gh-pages.js webpack.config.js
         npm run build
-        cp dist/index.html dist/index.php
         
     - name: Deploy build/dist folder to github pages
       uses: s0/git-publish-subdir-action@develop
