@@ -12,6 +12,8 @@ import StatsTable from "./StatsTable";
 import { useSearch } from "./useSearch";
 import { useDebounce } from "use-debounce";
 
+import { DataPvpGL } from "./data-pvp-gl"
+
 const PAGE_SIZE = 20;
 const nbsp = "\u00a0";
 
@@ -60,6 +62,21 @@ interface MonsterProps {
   pokemon: Pokemon;
 }
 
+
+function findByDex(data: any[], Dex: number) {
+  const el = data.find(el => el.Dex === Dex); // Possibly returns `undefined`
+  const pokemonPvpGL = data;
+  return (
+    <div className="StatsTable tabular-nums">
+    <div className="b tl">Great League</div>
+    <div className="tr ph2">Level:{ el.Lvl } CP:{ el.CP }</div>
+    <div className="tr ph2">IV: { el.AtkIV }/{ el.DefIV }/{ el.StaIV }</div>
+    </div>
+  );
+}
+
+// console.log(findByDex(DataPvpGL, 3));
+
 function Monster({ pokemon }: MonsterProps) {
   const displayNumber = "#" + String(pokemon.number).padStart(3, "0");
   const params = new URLSearchParams({ types: pokemon.types.join(" ") });
@@ -96,10 +113,13 @@ function Monster({ pokemon }: MonsterProps) {
             {pokemon.types.map((t, i) => (
               <WeatherBoosted key={i} type={t} index={i} />
             ))}
-          </div>          
+          </div>
         </div>
       </div>
       <div className="flex flex-column">
+        
+          {findByDex(DataPvpGL, pokemon.number)}
+        
         <StatsTable pokemon={pokemon} />
         <div className="flex justify-end">
           <a
@@ -248,3 +268,4 @@ export default function ScreenPokedex({
 }
 
 ScreenPokedex.displayName = "ScreenPokedex";
+
