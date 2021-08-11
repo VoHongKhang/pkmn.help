@@ -8,12 +8,13 @@ import { getWeatherBoosted } from "./getWeatherBoosted";
 import Paginator from "./Paginator";
 import { pickTranslation } from "./pickTranslation";
 import Search from "./Search";
-import StatsTable from "./StatsTable";
+// import StatsTable from "./StatsTable";
 import { useSearch } from "./useSearch";
 import { useDebounce } from "use-debounce";
 
 import { DataPvpGL } from "./data-pvp-gl";
-import { DataPvpUL } from "./data-pvp-ul"
+import { DataPvpUL } from "./data-pvp-ul";
+import { DataBuddyCandies } from "./data-buddy";
 
 const PAGE_SIZE = 20;
 const nbsp = "\u00a0";
@@ -66,20 +67,35 @@ interface MonsterProps {
 
 function findByDex(data: any[], Dex: number) {
   const el = data.find(el => el.Dex === Dex); // Possibly returns `undefined`
-  if (el){
-  return (
-    <div className="tl ph2">
-      Level {el.Lvl}
-      <span aria-hidden="true" className="o-50">
-        &nbsp;&bull;&nbsp;
-      </span>
-      CP {el.CP}
-      <span aria-hidden="true" className="o-50">
-        &nbsp;&bull;&nbsp;
-      </span>
-      IV {el.AtkIV}/{el.DefIV}/{el.StaIV}
-    </div>
-  );
+  if (el) {
+    return (
+      <div className="tl ph2">
+        Level {el.Lvl}
+        <span aria-hidden="true" className="o-50">
+          &nbsp;&bull;&nbsp;
+        </span>
+        CP {el.CP}
+        <span aria-hidden="true" className="o-50">
+          &nbsp;&bull;&nbsp;
+        </span>
+        IV {el.AtkIV}/{el.DefIV}/{el.StaIV}
+      </div>
+    );
+  }
+}
+
+function findByName(data: any[], Name: string) {
+  const myName = Name.split('-');
+  // console.log(myName);
+  // console.log(myName[0]);
+  // console.log(myName[1]);
+  const el = data.find(el => el.title.toLocaleLowerCase().includes(myName[0]));
+  if (el) {
+    return (
+      <div className="tl ph2">
+        {el.field_buddy_distance_requirement} to earn a candy
+      </div>
+    );
   }
 }
 
@@ -126,16 +142,22 @@ function Monster({ pokemon }: MonsterProps) {
       </div>
       <div className="flex flex-column">
 
-        < div className="StatsTable tabular-nums">
+        <div className="StatsTable tabular-nums">
           <div className="b tl">GreatLeague</div>
           {findByDex(DataPvpGL, pokemon.number)}
         </div>
-        < div className="StatsTable tabular-nums">
+        <div className="StatsTable tabular-nums">
           <div className="b tl">Ultra  League</div>
           {findByDex(DataPvpUL, pokemon.number)}
         </div>
+        <div className="StatsTable tabular-nums">
+          <div className="b tl">Buddy distance</div>
+          {/* {console.log(pokemon.name)} */}
+          {findByName(DataBuddyCandies, pokemon.name)}
+        </div>
 
-        <StatsTable pokemon={pokemon} />
+        {/* <StatsTable pokemon={pokemon} /> */}
+
         <div className="flex justify-end">
           <a
             aria-label={`Bulbapedia page for ${speciesName}`}
