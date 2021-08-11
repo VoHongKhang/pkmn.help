@@ -14,5 +14,19 @@ Pokémon Type Calculator helps you figure out offense/defense matchups for Poké
 
 ```
 $ npm install
-$ npm start
+$ npm run start
 ```
+
+## New features in my forked
+
+Info for **Pokemon GO** only
+
+- Add rank 1 & IV for Great & Ultra League into Pokedex
+- Create Android APK to install on mobile
+- Use hashrouter so we can deploy this app in a subfolder like Github page
+  - Github page <https://nguoianphu.github.io/pkmn.help>
+  - My own web hosting <https://play.nguoianphu.com/pkmn.help/>
+- To do:
+  - Add Evoluation line
+  - Add required candies to evolve 
+  - Add buddy distance to earn candies: how many km per candy
