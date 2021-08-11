@@ -22,7 +22,9 @@ $ npm run start
 Info for **Pokemon GO** only
 
 - Add rank 1 & IV for Great & Ultra League into Pokedex
+  - Data get from <https://pvpivs.com/leagueRanks.html>
 - Create Android APK to install on mobile
+  - Using Capacitor
 - Use hashrouter so we can deploy this app in a subfolder like Github page
   - Github page <https://nguoianphu.github.io/pkmn.help>
   - My own web hosting <https://play.nguoianphu.com/pkmn.help/>
