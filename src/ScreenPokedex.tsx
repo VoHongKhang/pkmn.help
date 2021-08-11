@@ -12,7 +12,8 @@ import StatsTable from "./StatsTable";
 import { useSearch } from "./useSearch";
 import { useDebounce } from "use-debounce";
 
-import { DataPvpGL } from "./data-pvp-gl"
+import { DataPvpGL } from "./data-pvp-gl";
+import { DataPvpUL } from "./data-pvp-ul"
 
 const PAGE_SIZE = 20;
 const nbsp = "\u00a0";
@@ -65,14 +66,21 @@ interface MonsterProps {
 
 function findByDex(data: any[], Dex: number) {
   const el = data.find(el => el.Dex === Dex); // Possibly returns `undefined`
-  const pokemonPvpGL = data;
+  if (el){
   return (
-    <div className="StatsTable tabular-nums">
-    <div className="b tl">Great League</div>
-    <div className="tr ph2">Level:{ el.Lvl } CP:{ el.CP }</div>
-    <div className="tr ph2">IV: { el.AtkIV }/{ el.DefIV }/{ el.StaIV }</div>
+    <div className="tl ph2">
+      Level {el.Lvl}
+      <span aria-hidden="true" className="o-50">
+        &nbsp;&bull;&nbsp;
+      </span>
+      CP {el.CP}
+      <span aria-hidden="true" className="o-50">
+        &nbsp;&bull;&nbsp;
+      </span>
+      IV {el.AtkIV}/{el.DefIV}/{el.StaIV}
     </div>
   );
+  }
 }
 
 // console.log(findByDex(DataPvpGL, 3));
@@ -117,9 +125,16 @@ function Monster({ pokemon }: MonsterProps) {
         </div>
       </div>
       <div className="flex flex-column">
-        
+
+        < div className="StatsTable tabular-nums">
+          <div className="b tl">GreatLeague</div>
           {findByDex(DataPvpGL, pokemon.number)}
-        
+        </div>
+        < div className="StatsTable tabular-nums">
+          <div className="b tl">Ultra  League</div>
+          {findByDex(DataPvpUL, pokemon.number)}
+        </div>
+
         <StatsTable pokemon={pokemon} />
         <div className="flex justify-end">
           <a
