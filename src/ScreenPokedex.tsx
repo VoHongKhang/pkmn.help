@@ -108,7 +108,8 @@ function findByDexToEvo(data: any[], Dex: number) {
     return (
       <div className="tl ph2">
         <Link
-            className="underline fg-link OutlineFocus"
+            className="fg-link OutlineFocus"
+            style={{textDecoration: "none"}}
             to={`/pokedex?q=${el.evolutions[0].pokemon_name}`}
           >
             {el.evolutions[0].pokemon_name}
@@ -126,7 +127,8 @@ function findByDexFromEvo(data: any[], Dex: number) {
     return (
       <div className="tl ph2">
         <Link
-            className="underline fg-link OutlineFocus"
+            className="fg-link OutlineFocus"
+            style={{textDecoration: "none"}}
             to={`/pokedex?q=${el.pokemon_name}`}
           >
             {el.pokemon_name}
