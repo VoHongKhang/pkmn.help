@@ -29487,7 +29487,7 @@ function findByDexToEvo(data, Dex) {
     if (el) {
         // console.log(el.evolutions[0].candy_required);
         return (react["createElement"]("div", { className: "tl ph2" },
-            react["createElement"](Link, { className: "underline fg-link OutlineFocus", to: `/pokedex?q=${el.evolutions[0].pokemon_name}` }, el.evolutions[0].pokemon_name),
+            react["createElement"](Link, { className: "fg-link OutlineFocus", style: { textDecoration: "none" }, to: `/pokedex?q=${el.evolutions[0].pokemon_name}` }, el.evolutions[0].pokemon_name),
             " with ",
             el.evolutions[0].candy_required,
             " candies"));
@@ -29498,7 +29498,7 @@ function findByDexFromEvo(data, Dex) {
     if (el) {
         // console.log(el.evolutions[0].candy_required);
         return (react["createElement"]("div", { className: "tl ph2" },
-            react["createElement"](Link, { className: "underline fg-link OutlineFocus", to: `/pokedex?q=${el.pokemon_name}` }, el.pokemon_name),
+            react["createElement"](Link, { className: "fg-link OutlineFocus", style: { textDecoration: "none" }, to: `/pokedex?q=${el.pokemon_name}` }, el.pokemon_name),
             " by ",
             el.evolutions[0].candy_required,
             " candies"));
