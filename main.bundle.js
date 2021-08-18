@@ -29500,9 +29500,18 @@ function findByDexToEvolutions(data, Dex) {
             // console.log(name.pokemon_name)
             return (react["createElement"]("div", { className: "tl ph2", key: name.pokemon_id },
                 react["createElement"](Link, { className: "fg-link OutlineFocus", style: { textDecoration: "none" }, to: `/pokedex?q=${name.pokemon_name}`, key: name.pokemon_id }, name.pokemon_name),
-                "\u00A0with ",
+                " ",
+                " with ",
                 name.candy_required,
-                " candies"));
+                " candies",
+                name.item_required ? " & " + name.item_required : "",
+                name.lure_required ? " & " + name.lure_required : "",
+                name.gender_required ? " & be a " + name.gender_required : "",
+                name.must_be_buddy_to_evolve ? " & must be buddy" : "",
+                name.buddy_distance_required ? " & walked " + name.buddy_distance_required + " km" : "",
+                name.only_evolves_in_nighttime ? " & Nighttime" : "",
+                name.only_evolves_in_daytime ? " & Daytime" : "",
+                name.no_candy_cost_if_traded ? " OR trade to evolve with no candy" : ""));
         });
         return (react["createElement"]("div", null, items));
     }
