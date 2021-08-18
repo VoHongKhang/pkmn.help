@@ -15,7 +15,7 @@ import { useDebounce } from "use-debounce";
 import { DataPvpGL } from "./data-pvp-gl";
 import { DataPvpUL } from "./data-pvp-ul";
 import { DataBuddyCandies } from "./data-buddy";
-import {DataEvolutions} from "./data-evolutions";
+import { DataEvolutions } from "./data-evolutions";
 
 const PAGE_SIZE = 20;
 const nbsp = "\u00a0";
@@ -107,18 +107,50 @@ function findByDexToEvo(data: any[], Dex: number) {
     // console.log(el.evolutions[0].candy_required);
     return (
       <div className="tl ph2">
+        {/* {el.evolutions.forEach( (element: { pokemon_name: any; }) =>
+            {console.log(element.pokemon_name)}
+          )} */}
+
         <Link
-            className="fg-link OutlineFocus"
-            style={{textDecoration: "none"}}
-            to={`/pokedex?q=${el.evolutions[0].pokemon_name}`}
-          >
-            {el.evolutions[0].pokemon_name}
-          </Link> with {el.evolutions[0].candy_required} candies
+          className="fg-link OutlineFocus"
+          style={{ textDecoration: "none" }}
+          to={`/pokedex?q=${el.evolutions[0].pokemon_name}`}
+        >
+          {el.evolutions[0].pokemon_name}
+        </Link> with {el.evolutions[0].candy_required} candies
       </div>
     );
   }
 }
 
+function findByDexToEvolutions(data: any[], Dex: number) {
+  const el = data.find(el => el.pokemon_id === Dex); // Possibly returns `undefined`
+  if (el) {
+    const items = el.evolutions.map(function (name: any) {
+
+      // console.log(name.pokemon_name)
+
+      return (
+        <div className="tl ph2" key={name.pokemon_id}>
+          <Link
+            className="fg-link OutlineFocus"
+            style={{ textDecoration: "none" }}
+            to={`/pokedex?q=${name.pokemon_name}`}
+            key={name.pokemon_id}
+          >
+            {name.pokemon_name}</Link>
+          &nbsp;with {name.candy_required} candies
+        </div>
+      );
+    });
+
+    return (
+      <div>
+        {items}
+      </div>
+    );
+  }
+}
 
 function findByDexFromEvo(data: any[], Dex: number) {
   const el = data.find(el => el.evolutions[0].pokemon_id === Dex); // Possibly returns `undefined`
@@ -127,12 +159,12 @@ function findByDexFromEvo(data: any[], Dex: number) {
     return (
       <div className="tl ph2">
         <Link
-            className="fg-link OutlineFocus"
-            style={{textDecoration: "none"}}
-            to={`/pokedex?q=${el.pokemon_name}`}
-          >
-            {el.pokemon_name}
-          </Link> by {el.evolutions[0].candy_required} candies
+          className="fg-link OutlineFocus"
+          style={{ textDecoration: "none" }}
+          to={`/pokedex?q=${el.pokemon_name}`}
+        >
+          {el.pokemon_name}
+        </Link> by {el.evolutions[0].candy_required} candies
       </div>
     );
   }
@@ -201,7 +233,7 @@ function Monster({ pokemon }: MonsterProps) {
         <div className="StatsTable tabular-nums">
           <div className="b tl">Evolutions to:</div>
           {/* {console.log(pokemon.name)} */}
-          {findByDexToEvo(DataEvolutions, pokemon.number)}
+          {findByDexToEvolutions(DataEvolutions, pokemon.number)}
         </div>
 
         {/* <StatsTable pokemon={pokemon} /> */}
