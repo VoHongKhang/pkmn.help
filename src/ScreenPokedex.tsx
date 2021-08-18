@@ -139,7 +139,15 @@ function findByDexToEvolutions(data: any[], Dex: number) {
             key={name.pokemon_id}
           >
             {name.pokemon_name}</Link>
-          &nbsp;with {name.candy_required} candies
+          {" "} with {name.candy_required} candies
+          {name.item_required ? " & " + name.item_required : ""}
+          {name.lure_required ? " & " + name.lure_required : ""}
+          {name.gender_required ? " & be a " + name.gender_required : ""}
+          {name.must_be_buddy_to_evolve ? " & must be buddy" : ""}
+          {name.buddy_distance_required ? " & walked " + name.buddy_distance_required + " km" : ""}
+          {name.only_evolves_in_nighttime ? " & Nighttime" : ""}
+          {name.only_evolves_in_daytime ? " & Daytime" : ""}
+          {name.no_candy_cost_if_traded ? " OR trade to evolve with no candy" : ""}
         </div>
       );
     });
