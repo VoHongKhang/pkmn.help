@@ -29493,6 +29493,20 @@ function findByDexToEvo(data, Dex) {
             " candies"));
     }
 }
+function findByDexToEvolutions(data, Dex) {
+    const el = data.find(el => el.pokemon_id === Dex); // Possibly returns `undefined`
+    if (el) {
+        const items = el.evolutions.map(function (name) {
+            // console.log(name.pokemon_name)
+            return (react["createElement"]("div", { className: "tl ph2", key: name.pokemon_id },
+                react["createElement"](Link, { className: "fg-link OutlineFocus", style: { textDecoration: "none" }, to: `/pokedex?q=${name.pokemon_name}`, key: name.pokemon_id }, name.pokemon_name),
+                "\u00A0with ",
+                name.candy_required,
+                " candies"));
+        });
+        return (react["createElement"]("div", null, items));
+    }
+}
 function findByDexFromEvo(data, Dex) {
     const el = data.find(el => el.evolutions[0].pokemon_id === Dex); // Possibly returns `undefined`
     if (el) {
@@ -29536,7 +29550,7 @@ function Monster({ pokemon }) {
                 findByDexFromEvo(DataEvolutions, pokemon.number)),
             react["createElement"]("div", { className: "StatsTable tabular-nums" },
                 react["createElement"]("div", { className: "b tl" }, "Evolutions to:"),
-                findByDexToEvo(DataEvolutions, pokemon.number)),
+                findByDexToEvolutions(DataEvolutions, pokemon.number)),
             react["createElement"]("div", { className: "flex justify-end" },
                 react["createElement"]("a", { "aria-label": `Bulbapedia page for ${speciesName}`, className: "underline fg-link OutlineFocus", href: pokemon.bulbapediaURL }, "Bulbapedia"),
                 react["createElement"]("span", { "aria-hidden": "true", className: "o-50" }, "\u00A0\u2022\u00A0"),
