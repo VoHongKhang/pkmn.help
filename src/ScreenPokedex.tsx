@@ -247,13 +247,13 @@ function Monster({ pokemon }: MonsterProps) {
         {/* <StatsTable pokemon={pokemon} /> */}
 
         <div className="flex justify-end">
-          <a
-            aria-label={`Bulbapedia page for ${speciesName}`}
+          <Link
+            aria-label={`Defense for ${speciesName} (${formName})`}
             className="underline fg-link OutlineFocus"
-            href={pokemon.bulbapediaURL}
+            to={`/defense?${params}#matchup-defense`}
           >
-            Bulbapedia
-          </a>
+            Defense
+          </Link>
           <span aria-hidden="true" className="o-50">
             &nbsp;&bull;&nbsp;
           </span>
@@ -267,13 +267,13 @@ function Monster({ pokemon }: MonsterProps) {
           <span aria-hidden="true" className="o-50">
             &nbsp;&bull;&nbsp;
           </span>
-          <Link
-            aria-label={`Defense for ${speciesName} (${formName})`}
+          <a
+            aria-label={`Pokémon GO Wiki page for ${speciesName}`}
             className="underline fg-link OutlineFocus"
-            to={`/defense?${params}#matchup-defense`}
+            href={`https://pokemongo.fandom.com/wiki/${pokemon.name}`}
           >
-            Defense
-          </Link>
+            Wiki
+          </a>
         </div>
       </div>
     </div>
