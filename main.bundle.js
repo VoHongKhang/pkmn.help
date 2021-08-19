@@ -29561,11 +29561,11 @@ function Monster({ pokemon }) {
                 react["createElement"]("div", { className: "b tl" }, "Evolutions to:"),
                 findByDexToEvolutions(DataEvolutions, pokemon.number)),
             react["createElement"]("div", { className: "flex justify-end" },
-                react["createElement"]("a", { "aria-label": `Bulbapedia page for ${speciesName}`, className: "underline fg-link OutlineFocus", href: pokemon.bulbapediaURL }, "Bulbapedia"),
+                react["createElement"](Link, { "aria-label": `Defense for ${speciesName} (${formName})`, className: "underline fg-link OutlineFocus", to: `/defense?${params}#matchup-defense` }, "Defense"),
                 react["createElement"]("span", { "aria-hidden": "true", className: "o-50" }, "\u00A0\u2022\u00A0"),
                 react["createElement"](Link, { "aria-label": `Offense for ${speciesName} (${formName})`, className: "underline fg-link OutlineFocus", to: `/offense?${params}#matchup-offense` }, "Offense"),
                 react["createElement"]("span", { "aria-hidden": "true", className: "o-50" }, "\u00A0\u2022\u00A0"),
-                react["createElement"](Link, { "aria-label": `Defense for ${speciesName} (${formName})`, className: "underline fg-link OutlineFocus", to: `/defense?${params}#matchup-defense` }, "Defense")))));
+                react["createElement"]("a", { "aria-label": `Pokémon GO Wiki page for ${speciesName}`, className: "underline fg-link OutlineFocus", href: `https://pokemongo.fandom.com/wiki/${pokemon.name}` }, "Wiki")))));
 }
 Monster.displayName = "Monster";
 function ScreenPokedex({ allPokemon, setPokedexParams, isLoading, }) {
