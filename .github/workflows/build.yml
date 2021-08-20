@@ -166,11 +166,17 @@ jobs:
        cd $GITHUB_WORKSPACE
        7z a -tzip -p${MY_ZIP_PASSWORD} keys.zip -r keys
 
-    - name: Build web to deploy to github page
-      if: runner.os != 'windows'
+    - name: Build web to deploy to github page - webpack
+      if: ${{ ! contains(github.ref, "vitejs") }}
       run: |
         rm -rf dist
         cp -Rf webpack.config.gh-pages.js webpack.config.js
+        npm run build
+    - name: Build web to deploy to github page - vitejs
+      if: contains(github.ref, "vitejs")
+      run: |
+        rm -rf dist
+        cp -Rf vite.config.githubpage.ts vite.config.ts
         npm run build
         
     - name: Deploy build/dist folder to github pages
