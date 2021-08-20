@@ -108,18 +108,58 @@ function findByDexToEvo(data: any[], Dex: number) {
     // console.log(el.evolutions[0].candy_required);
     return (
       <div className="tl ph2">
+        {/* {el.evolutions.forEach( (element: { pokemon_name: any; }) =>
+            {console.log(element.pokemon_name)}
+          )} */}
+
         <Link
-            className="fg-link OutlineFocus"
-            style={{textDecoration: "none"}}
-            to={`/pokedex?q=${el.evolutions[0].pokemon_name}`}
-          >
-            {el.evolutions[0].pokemon_name}
-          </Link> with {el.evolutions[0].candy_required} candies
+          className="fg-link OutlineFocus"
+          style={{ textDecoration: "none" }}
+          to={`/pokedex?q=${el.evolutions[0].pokemon_name}`}
+        >
+          {el.evolutions[0].pokemon_name}
+        </Link> with {el.evolutions[0].candy_required} candies
       </div>
     );
   }
 }
 
+function findByDexToEvolutions(data: any[], Dex: number) {
+  const el = data.find(el => el.pokemon_id === Dex); // Possibly returns `undefined`
+  if (el) {
+    const items = el.evolutions.map(function (name: any) {
+
+      // console.log(name.pokemon_name)
+
+      return (
+        <div className="tl ph2" key={name.pokemon_id}>
+          <Link
+            className="fg-link OutlineFocus"
+            style={{ textDecoration: "none" }}
+            to={`/pokedex?q=${name.pokemon_name}`}
+            key={name.pokemon_id}
+          >
+            {name.pokemon_name}</Link>
+          {" "} with {name.candy_required} candies
+          {name.item_required ? " & " + name.item_required : ""}
+          {name.lure_required ? " & " + name.lure_required : ""}
+          {name.gender_required ? " & be a " + name.gender_required : ""}
+          {name.must_be_buddy_to_evolve ? " & must be buddy" : ""}
+          {name.buddy_distance_required ? " & walked " + name.buddy_distance_required + " km" : ""}
+          {name.only_evolves_in_nighttime ? " & Nighttime" : ""}
+          {name.only_evolves_in_daytime ? " & Daytime" : ""}
+          {name.no_candy_cost_if_traded ? " OR trade to evolve with no candy" : ""}
+        </div>
+      );
+    });
+
+    return (
+      <div>
+        {items}
+      </div>
+    );
+  }
+}
 
 function findByDexFromEvo(data: any[], Dex: number) {
   const el = data.find(el => el.evolutions[0].pokemon_id === Dex); // Possibly returns `undefined`
@@ -128,12 +168,12 @@ function findByDexFromEvo(data: any[], Dex: number) {
     return (
       <div className="tl ph2">
         <Link
-            className="fg-link OutlineFocus"
-            style={{textDecoration: "none"}}
-            to={`/pokedex?q=${el.pokemon_name}`}
-          >
-            {el.pokemon_name}
-          </Link> by {el.evolutions[0].candy_required} candies
+          className="fg-link OutlineFocus"
+          style={{ textDecoration: "none" }}
+          to={`/pokedex?q=${el.pokemon_name}`}
+        >
+          {el.pokemon_name}
+        </Link> by {el.evolutions[0].candy_required} candies
       </div>
     );
   }
@@ -202,19 +242,19 @@ function Monster({ pokemon }: MonsterProps) {
         <div className="StatsTable tabular-nums">
           <div className="b tl">Evolutions to:</div>
           {/* {console.log(pokemon.name)} */}
-          {findByDexToEvo(DataEvolutions, pokemon.number)}
+          {findByDexToEvolutions(DataEvolutions, pokemon.number)}
         </div>
 
         {/* <StatsTable pokemon={pokemon} /> */}
 
         <div className="flex justify-end">
-          <a
-            aria-label={`Bulbapedia page for ${speciesName}`}
+          <Link
+            aria-label={`Defense for ${speciesName} (${formName})`}
             className="underline fg-link OutlineFocus"
-            href={pokemon.bulbapediaURL}
+            to={`/defense?${params}#matchup-defense`}
           >
-            Bulbapedia
-          </a>
+            Defense
+          </Link>
           <span aria-hidden="true" className="o-50">
             &nbsp;&bull;&nbsp;
           </span>
@@ -228,13 +268,13 @@ function Monster({ pokemon }: MonsterProps) {
           <span aria-hidden="true" className="o-50">
             &nbsp;&bull;&nbsp;
           </span>
-          <Link
-            aria-label={`Defense for ${speciesName} (${formName})`}
+          <a
+            aria-label={`Pokémon GO Wiki page for ${speciesName}`}
             className="underline fg-link OutlineFocus"
-            to={`/defense?${params}#matchup-defense`}
+            href={`https://pokemongo.fandom.com/wiki/${pokemon.name}`}
           >
-            Defense
-          </Link>
+            Wiki
+          </a>
         </div>
       </div>
     </div>
