@@ -1,35 +1,4 @@
-/**
- * Source https://pogoapi.net/documentation/
- * https://pogoapi.net/api/v1/pokemon_evolutions.json
- * 
- * 
-GET /api/v1/pokemon_evolutions.json
-Some Pokemon can evolve into a stronger form by feeding them candy or meeting certain conditions. Once these conditions have been met you can press the "evolve" button to transform them to the next form.
-
-If multiple evolutions meet the requirements and they have the same priority (or it is not set) the evolution will be randomly chosen.
-
-This API lists all the Pokemon that can evolve, what they can evolve into, and the requirements for their evolution.
-
-Returns a JSON array of objects, the objects have the following keys.
-
-pokemon_id - ID of the Pokemon that evolves
-pokemon_name - Name of the Pokemon that evolves
-form - Only present if the Pokemon has multiple forms
-evolutions - An array of objects detailing what Pokemon this can evolve into. Each object has the following keys:
-candy_required - The amount of candy to evolve this Pokemon with standard means
-item_required - If the Pokemon requires an item to evolve this will be the name of the item
-lure_required - If the Pokemon requires a lure to evolve this will be the name of the lure
-no_candy_cost_if_traded - This will be set to true if the evolution will cost no candy after trading
-priority - If a priority is set then the evolution with the highest priority will be chosen above those with a lower priority when multiple evolution criteria are met
-only_evolves_in_daytime - Set to true if the Pokemon will only evolve in the daytime
-only_evolves_in_nighttime - Set to true if the Pokemon will only evolve at night time
-must_be_buddy_to_evolve - Set if this evolution can only occur if they are your buddy
-buddy_distance_required - Set if this Pokemon must have been walked a specific amount of distance to evolve
-gender_required - Set to Male/Female if a specific gender is required for the evolution
-
-**/
-
-export const DataEvolutions = [
+[
     {
         "evolutions": [
             {

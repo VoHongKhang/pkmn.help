@@ -15,8 +15,8 @@ import { cssType } from "./cssType";
 
 import DataPvpGL from "./data-pvp-gl.json";
 import DataPvpUL from "./data-pvp-ul.json"
-import { DataBuddyCandies } from "./data-buddy";
-import {DataEvolutions} from "./data-evolutions";
+import DataBuddyCandies from "./data-buddy.json";
+import DataEvolutions from "./data-evolutions.json";
 
 const PAGE_SIZE = 20;
 const nbsp = "\u00a0";

@@ -1,11 +1,4 @@
-/*
-- Get data from https://gamepress.gg//sites//default//files//aggregatedjson//buddy-distances-PoGO.json
-- Add the "export const DataBuddyCandies = [" at top of JSON
-- Add "];" at the end of JSON
-- Change JSON file name to ".js"
-*/
-
-export const DataBuddyCandies = [
+[
   { "title": "Bulbasaur", "field_buddy_distance_requirement": "3 km" },
   { "title": "Ivysaur", "field_buddy_distance_requirement": "3 km" },
   { "title": "Venusaur", "field_buddy_distance_requirement": "3 km" },
