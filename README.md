@@ -2,6 +2,10 @@
 
 **👉 <https://www.pkmn.help>**
 
+**🚀 This repo page <https://nguoianphu.github.io/pkmn.help>**
+
+**🎉 FTP web page <https://play.nguoianphu.com/pkmn.help/>**
+
 # Pokémon Type Calculator
 
 Pokémon Type Calculator helps you figure out offense/defense matchups for Pokémon
