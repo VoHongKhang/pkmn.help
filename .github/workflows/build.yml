@@ -167,7 +167,7 @@ jobs:
        7z a -tzip -p${MY_ZIP_PASSWORD} keys.zip -r keys
 
     - name: Build web to deploy to github page - webpack
-      if: ${{ ! contains(github.ref, "vitejs") }}
+      if: ! contains(github.ref, "vitejs")
       run: |
         rm -rf dist
         cp -Rf webpack.config.gh-pages.js webpack.config.js
