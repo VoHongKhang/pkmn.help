@@ -25,15 +25,20 @@ Info for **Pokemon GO** only
   - Data from <https://niantic.helpshift.com/a/pokemon-go/?s=finding-evolving-hatching&f=weather-boosts&l=en&p=web>
 - Add rank 1 & IV for Great & Ultra Leagues into Pokedex
   - Data get from <https://pvpivs.com/leagueRanks.html>
+    - Choose Great League
+    - Choose Ultra League
+    - Convert output to CSV and then JSON
 - Create Android APK to install on mobile
   - Using Capacitor
 - Use hashrouter so we can deploy this webpage in a subfolder like Github page
   - Github page <https://nguoianphu.github.io/pkmn.help>
   - My own web hosting <https://play.nguoianphu.com/pkmn.help/>
 - Add buddy distance to earn candies: how many km per candy
-  - Data from https://gamepress.gg
+  - Data from <https://gamepress.gg//sites//default//files//aggregatedjson//buddy-distances-PoGO.json?1911266363588109127>
+  - Data from https://pogoapi.net/api/v1/pokemon_buddy_distances.json
 - Add Evolutions
   - Data from https://pogoapi.net/
+    - https://pogoapi.net/api/v1/pokemon_evolutions.json
   - Add required candies to evolve
   - Item to evolve
   - Other conditions to evolve
