@@ -34,7 +34,7 @@ Info for **Pokemon GO** only
   - Github page <https://nguoianphu.github.io/pkmn.help>
   - My own web hosting <https://play.nguoianphu.com/pkmn.help/>
 - Add buddy distance to earn candies: how many km per candy
-  - Data from <https://gamepress.gg//sites//default//files//aggregatedjson//buddy-distances-PoGO.json?1911266363588109127>
+  <!-- - Data from <https://gamepress.gg//sites//default//files//aggregatedjson//buddy-distances-PoGO.json?1911266363588109127> -->
   - Data from https://pogoapi.net/api/v1/pokemon_buddy_distances.json
 - Add Evolutions
   - Data from https://pogoapi.net/

@@ -15,8 +15,9 @@ import { cssType } from "./cssType";
 
 import DataPvpGL from "./data-pvp-gl.json";
 import DataPvpUL from "./data-pvp-ul.json"
-import DataBuddyCandies from "./data-buddy.json";
 import DataEvolutions from "./data-evolutions.json";
+import DataBuddyCandies from "./data-buddy-distances.json";
+
 
 const PAGE_SIZE = 20;
 const nbsp = "\u00a0";
@@ -66,7 +67,7 @@ interface MonsterProps {
   pokemon: Pokemon;
 }
 
-
+// Find GL or UL best IVs
 function findByDex(data: any[], Dex: number) {
   const el = data.find(el => el.Dex === Dex); // Possibly returns `undefined`
   if (el) {
@@ -86,43 +87,67 @@ function findByDex(data: any[], Dex: number) {
   }
 }
 
-function findByName(data: any[], Name: string) {
-  const myName = Name.split('-');
-  // console.log(myName);
-  // console.log(myName[0]);
-  // console.log(myName[1]);
-  const el = data.find(el => el.title.toLocaleLowerCase().includes(myName[0]));
+// Find buddy distances to earn a candy by gamepress.gg data
+// Deprecated
+// function findByName(data: any[], Name: string) {
+//   const myName = Name.split('-');
+//   const el = data.find(el => el.title.toLocaleLowerCase().includes(myName[0]));
+//   if (el) {
+//     return (
+//       <div className="tl ph2">
+//         {el.field_buddy_distance_requirement} to earn a candy
+//       </div>
+//     );
+//   }
+// }
+
+// Find buddy distances to earn a candy
+// Data from https://pogoapi.net/api/v1/pokemon_buddy_distances.json
+function findByDexToCandy(data: any[], Dex: number) {
+  const el = data.find(el => el.pokemon_id === Dex);
+  if (el) {
+    return el.distance
+  }
+}
+
+function findByDexToCandyAll(data: any, Dex: number) {
+  let el = findByDexToCandy(data[1], Dex)
+  if (!el) {
+    el = findByDexToCandy(data[3], Dex)
+  }
+  if (!el) {
+    el = findByDexToCandy(data[5], Dex)
+  }
+  if (!el) {
+    el = findByDexToCandy(data[20], Dex)
+  }
   if (el) {
     return (
       <div className="tl ph2">
-        {el.field_buddy_distance_requirement} to earn a candy
+        {el} km to earn a candy
       </div>
     );
   }
 }
 
 
-function findByDexToEvo(data: any[], Dex: number) {
-  const el = data.find(el => el.pokemon_id === Dex); // Possibly returns `undefined`
-  if (el) {
-    // console.log(el.evolutions[0].candy_required);
-    return (
-      <div className="tl ph2">
-        {/* {el.evolutions.forEach( (element: { pokemon_name: any; }) =>
-            {console.log(element.pokemon_name)}
-          )} */}
 
-        <Link
-          className="fg-link OutlineFocus"
-          style={{ textDecoration: "none" }}
-          to={`/pokedex?q=${el.evolutions[0].pokemon_name}`}
-        >
-          {el.evolutions[0].pokemon_name}
-        </Link> with {el.evolutions[0].candy_required} candies
-      </div>
-    );
-  }
-}
+// function findByDexToEvo(data: any[], Dex: number) {
+//   const el = data.find(el => el.pokemon_id === Dex); // Possibly returns `undefined`
+//   if (el) {
+//     return (
+//       <div className="tl ph2">
+//         <Link
+//           className="fg-link OutlineFocus"
+//           style={{ textDecoration: "none" }}
+//           to={`/pokedex?q=${el.evolutions[0].pokemon_name}`}
+//         >
+//           {el.evolutions[0].pokemon_name}
+//         </Link> with {el.evolutions[0].candy_required} candies
+//       </div>
+//     );
+//   }
+// }
 
 function findByDexToEvolutions(data: any[], Dex: number) {
   const el = data.find(el => el.pokemon_id === Dex); // Possibly returns `undefined`
@@ -231,17 +256,14 @@ function Monster({ pokemon }: MonsterProps) {
         </div>
         <div className="StatsTable tabular-nums">
           <div className="b tl">Buddy distance</div>
-          {/* {console.log(pokemon.name)} */}
-          {findByName(DataBuddyCandies, pokemon.name)}
+          {findByDexToCandyAll(DataBuddyCandies, pokemon.number)}
         </div>
         <div className="StatsTable tabular-nums">
           <div className="b tl">Evolutions from:</div>
-          {/* {console.log(pokemon.name)} */}
           {findByDexFromEvo(DataEvolutions, pokemon.number)}
         </div>
         <div className="StatsTable tabular-nums">
           <div className="b tl">Evolutions to:</div>
-          {/* {console.log(pokemon.name)} */}
           {findByDexToEvolutions(DataEvolutions, pokemon.number)}
         </div>
 
