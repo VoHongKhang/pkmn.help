@@ -53,110 +53,105 @@ export default function App() {
     load();
   }, []);
   return (
-    <div className="sans-serif bg2 fg1 min-vh-100 flex flex-column">
-      <div className="flex-auto">
-        <h1 className="f3-ns f4 tc relative white PokeballHeader">
+    <div className="flex-auto">
+      <h1 className="f3-ns f4 tc relative white PokeballHeader">
           <HashRouter>
-            <Link
-              to="/"
-              className="no-underline white hover-white-90 DottedFocus"
-            >
-              Pokémon Type Calculator
-            </Link>
+        <Link to="/" className="no-underline white OutlineFocus">
+          Pokémon Type Calculator
+        </Link>
           </HashRouter>
-        </h1>
-        <nav
-          className={classnames([
-            "flex justify-center",
-            "bg1",
-            "bb TabBarBorder",
-            "pt3",
-          ])}
+      </h1>
+      <nav
+        className={classnames([
+          "flex justify-center",
+          "bg1",
+          "bb TabBarBorder",
+          "pt3",
+        ])}
+      >
+          <HashRouter>
+        <NavLink
+          className={tabClass}
+          activeClassName={tabClassActive}
+          to={`/offense${offenseParams}`}
         >
-          <HashRouter>
-            <NavLink
-              className={tabClass}
-              activeClassName={tabClassActive}
-              to={`/offense${offenseParams}`}
-            >
-              Offense
-            </NavLink>
-            <NavLink
-              className={tabClass}
-              activeClassName={tabClassActive}
-              to={`/defense${defenseParams}`}
-            >
-              Defense
-            </NavLink>
-            <NavLink
-              className={tabClass}
-              activeClassName={tabClassActive}
-              to={`/pokedex${pokedexParams}`}
-            >
-              Pokédex
-            </NavLink>
-            <NavLink
-              className={tabClass}
-              activeClassName={tabClassActive}
-              to="/info"
-            >
-              Info
-            </NavLink>
+          Offense
+        </NavLink>
+        <NavLink
+          className={tabClass}
+          activeClassName={tabClassActive}
+          to={`/defense${defenseParams}`}
+        >
+          Defense
+        </NavLink>
+        <NavLink
+          className={tabClass}
+          activeClassName={tabClassActive}
+          to={`/pokedex${pokedexParams}`}
+        >
+          Pokédex
+        </NavLink>
+        <NavLink
+          className={tabClass}
+          activeClassName={tabClassActive}
+          to="/info"
+        >
+          Info
+        </NavLink>
           </HashRouter>
-        </nav>
-        <Switch>
+      </nav>
+      <Switch>
           <HashRouter>
-            <Route
-              path="/offense/coverage"
-              render={() => (
-                <ScreenWeaknessCoverage
-                  setCoverageTypes={setCoverageTypes}
-                  offenseParams={offenseParams}
-                  fallbackCoverageTypes={fallbackCoverageTypes}
-                  isLoading={isLoading}
-                />
-              )}
+        <Route
+          path="/offense/coverage"
+          render={() => (
+            <ScreenWeaknessCoverage
+              setCoverageTypes={setCoverageTypes}
+              offenseParams={offenseParams}
+              fallbackCoverageTypes={fallbackCoverageTypes}
+              isLoading={isLoading}
             />
-            <Route
-              path="/offense"
-              render={() => (
-                <ScreenOffense
-                  coverageTypes={coverageTypes}
-                  setCoverageTypes={setCoverageTypes}
-                  setOffenseParams={setOffenseParams}
-                  fallbackCoverageTypes={fallbackCoverageTypes}
-                  isLoading={isLoading}
-                />
-              )}
+          )}
+        />
+        <Route
+          path="/offense"
+          render={() => (
+            <ScreenOffense
+              coverageTypes={coverageTypes}
+              setCoverageTypes={setCoverageTypes}
+              setOffenseParams={setOffenseParams}
+              fallbackCoverageTypes={fallbackCoverageTypes}
+              isLoading={isLoading}
             />
-            <Route
-              path="/defense"
-              render={() => (
-                <ScreenDefense
-                  setDefenseParams={setDefenseParams}
-                  fallbackCoverageTypes={fallbackCoverageTypes}
-                />
-              )}
+          )}
+        />
+        <Route
+          path="/defense"
+          render={() => (
+            <ScreenDefense
+              setDefenseParams={setDefenseParams}
+              fallbackCoverageTypes={fallbackCoverageTypes}
             />
-            <Route
-              path="/pokedex/help"
-              render={() => <ScreenPokedexHelp pokedexParams={pokedexParams} />}
+          )}
+        />
+        <Route
+          path="/pokedex/help"
+          render={() => <ScreenPokedexHelp pokedexParams={pokedexParams} />}
+        />
+        <Route
+          path="/pokedex"
+          render={() => (
+            <ScreenPokedex
+              setPokedexParams={setPokedexParams}
+              allPokemon={AllPokemon}
+              isLoading={isLoading}
             />
-            <Route
-              path="/pokedex"
-              render={() => (
-                <ScreenPokedex
-                  setPokedexParams={setPokedexParams}
-                  allPokemon={AllPokemon}
-                  isLoading={isLoading}
-                />
-              )}
-            />
-            <Route path="/info" component={ScreenInfo} />
-            <Redirect to="/defense" />
+          )}
+        />
+        <Route path="/info" component={ScreenInfo} />
+        <Redirect to="/defense" />
           </HashRouter>
-        </Switch>
-      </div>
+      </Switch>
     </div>
   );
 }
