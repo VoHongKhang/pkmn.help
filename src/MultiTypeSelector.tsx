@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import classNames from "classnames";
 import * as React from "react";
 import { Type, types } from "./data";
 import { cssType } from "./cssType";
@@ -15,8 +15,9 @@ export default function MultiTypeSelector({
   value,
 }: TypeSelectorProps) {
   const styles = {
-    selected: "border2 type-bg-dark no-box-shadow button-shadow",
-    normal: "border2 bg1 fg1 button-bg button-shadow",
+    selected:
+      "border-vibrant2 type-bg-dark no-box-shadow button-shadow SelectedFocus",
+    normal: "border1 bg1 fg1 button-bg button-shadow SimpleFocus",
   };
   return (
     <div className="MultiTypeSelector-Container">
@@ -28,14 +29,13 @@ export default function MultiTypeSelector({
             role="checkbox"
             aria-checked={isChecked ? "true" : "false"}
             key={`type-${type}`}
-            className={classnames(
+            className={classNames(
               style,
               "db w-100",
               "ba br1",
               "pv1 ph2",
               "f5 b",
               "ttc",
-              isChecked ? "SelectedFocus" : "SimpleFocus",
               "SimpleFocus",
               "active-squish",
               cssType(type)
@@ -54,9 +54,11 @@ export default function MultiTypeSelector({
           >
             <span className="flex flex-row items-center justify-center">
               <span
-                className={classnames(
-                  `type-${type} b--black ba br1`,
-                  isChecked ? "border1 type-bg-light" : "border2 type-bg-dark"
+                className={classNames(
+                  `type-${type} ba br1`,
+                  isChecked
+                    ? "b--black type-bg-light"
+                    : "border-vibrant type-bg-dark"
                 )}
                 style={{
                   width: "1rem",

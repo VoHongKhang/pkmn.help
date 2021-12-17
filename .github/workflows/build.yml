@@ -189,7 +189,7 @@ jobs:
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
         local-dir: ./dist/
-        server-dir: ${{ secrets.ftp_server_dir }}/        
+        server-dir: ${{ secrets.ftp_server_dir }}/
 
     - name: Release
       if: startsWith(github.ref, 'refs/tags/')

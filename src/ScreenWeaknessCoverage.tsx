@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import classNames from "classnames";
 import { closest } from "fastest-levenshtein";
 import Papa from "papaparse";
 import * as React from "react";
@@ -7,14 +7,14 @@ import { CoverageType, objectToCoverageType, stringToType, Type } from "./data";
 import { pickFile } from "./pickFile";
 import { saveFile } from "./saveFile";
 
-const buttonClasses = classnames(
+const buttonClasses = classNames(
   "no-underline",
   "db",
   "ba br2 pv1 ph2",
   "b f5",
   "SimpleFocus",
   "active-squish",
-  "border2 button-shadow button-bg button-bg-hover color-inherit"
+  "border1 button-shadow button-bg button-bg-hover color-inherit"
 );
 
 interface WeaknessCoverageProps {
@@ -169,7 +169,7 @@ export default function ScreenWeaknessCoverage({
       <p>
         <b aria-hidden="true">&larr;</b>{" "}
         <Link
-          to={`/offense${offenseParams}`}
+          to={`/offense/${offenseParams}`}
           className="underline fg-link OutlineFocus"
         >
           Back to offense
@@ -178,4 +178,3 @@ export default function ScreenWeaknessCoverage({
     </main>
   );
 }
-

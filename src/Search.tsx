@@ -1,18 +1,12 @@
-import classnames from "classnames";
+import classNames from "classnames";
 import * as React from "react";
-import { PUBLIC_PATH } from "./settings";
+import { IconSearch } from "./IconSearch";
+import { IconClear } from "./IconClear";
 
 interface SearchProps {
   updateSearch: (search: string) => void;
   search: string;
 }
-
-function preloadImage(src: string): void {
-  new Image().src = src;
-}
-
-preloadImage("/svg/search.svg");
-preloadImage("/svg/clear.svg");
 
 export default function Search({ updateSearch, search }: SearchProps) {
   const ref = React.useRef<HTMLInputElement>(null);
@@ -20,22 +14,21 @@ export default function Search({ updateSearch, search }: SearchProps) {
   const inputHeight = 36;
   return (
     <div className="relative mv3">
-      <img
-        src={`${PUBLIC_PATH}svg/search.svg`}
+      <IconSearch
         width={iconSize}
         height={iconSize}
         role="presentation"
-        className="o-50 absolute dark--invert"
+        className="absolute fg3 fill-currentColor"
         style={{ left: 10, top: 8 }}
       />
       <input
-        aria-label="Search"
+        aria-label="Search by name, number, or types"
         type="text"
         autoComplete="off"
         autoCorrect="off"
         inputMode="search"
         autoCapitalize="none"
-        className={classnames(
+        className={classNames(
           "f5 w-100 border-box",
           "pv2",
           "SimpleFocus",
@@ -43,7 +36,7 @@ export default function Search({ updateSearch, search }: SearchProps) {
           "br-pill ba",
           "bg1",
           "fg1",
-          "border2"
+          "border1"
         )}
         style={{ paddingLeft: 40, paddingRight: 40, height: inputHeight }}
         value={search}
@@ -52,8 +45,7 @@ export default function Search({ updateSearch, search }: SearchProps) {
         }}
         ref={ref}
       />
-      <img
-        src={`${PUBLIC_PATH}svg/clear.svg`}
+      <IconClear
         width={iconSize}
         height={iconSize}
         role="presentation"
@@ -63,7 +55,7 @@ export default function Search({ updateSearch, search }: SearchProps) {
             ref.current.focus();
           }
         }}
-        className={classnames("o-50 absolute dark--invert", {
+        className={classNames("absolute fg3 fill-currentColor", {
           dn: search === "",
         })}
         style={{ right: 6, top: 6 }}
@@ -71,4 +63,3 @@ export default function Search({ updateSearch, search }: SearchProps) {
     </div>
   );
 }
-

@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import classNames from "classnames";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import {
@@ -19,20 +19,19 @@ interface BadgeProps {
 function Badge({ type }: BadgeProps) {
   return (
     <div
-      className={classnames(
-        `type-bg-dark`,
+      className={classNames(
+        "type-bg-dark",
         cssType(type),
-        "ba border3",
-        "ph1 pv1 br1",
-        "ttc tc b f5"
+        "ba border-vibrant",
+        "br2",
+        "ttc tc b f5 lh-title"
       )}
-      style={{ width: 80, margin: "0.125rem" }}
+      style={{ width: 80, margin: "0.125rem", padding: 2 }}
     >
-      {type}
+      <div className="bg-black-40 br1 ba b--black-10 white">{type}</div>
     </div>
   );
 }
-
 
 interface SectionProps {
   title: string;
@@ -54,7 +53,6 @@ function Section({ title, types }: SectionProps) {
     </div>
   );
 }
-
 
 interface MatchupsProps {
   coverageTypes?: CoverageType[];
@@ -84,7 +82,7 @@ function Matchups({
             <span className="normal">
               (
               <Link
-                to="/offense/coverage"
+                to="/offense/coverage/"
                 className="underline fg-link OutlineFocus"
               >
                 edit
@@ -93,7 +91,7 @@ function Matchups({
             </span>
           </h3>
           <div
-            className={classnames(
+            className={classNames(
               "pt1 mw5 center tc",
               isLoading && ["o-30 no-pointer cursor-na"]
             )}
@@ -134,7 +132,6 @@ function Matchups({
   );
 }
 
-
 export interface DefenseProps {
   type1: Type;
   type2: Type;
@@ -153,7 +150,6 @@ export function Defense({ type1, type2, fallbackCoverageTypes }: DefenseProps) {
     />
   );
 }
-
 
 export interface OffenseProps {
   coverageTypes?: CoverageType[];
@@ -181,4 +177,3 @@ export function Offense({
     />
   );
 }
-
