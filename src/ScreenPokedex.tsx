@@ -390,7 +390,6 @@ export default function ScreenPokedex({
       />
       <div className="flex justify-between ph2 nt2 pb3 bb border4 f6">
         <span className="fg3">Search by name, number, or types</span>
-        <Link to="/pokedex/help" className="underline fg-link OutlineFocus">
         <Link
           to="/pokedex/help/"
           className="underline fg-link OutlineFocus"
