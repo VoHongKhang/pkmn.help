@@ -4,6 +4,7 @@ import * as React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Pokemon, Type, typesOrNoneFromString } from "./data";
 import { getImage } from "./getImage";
+import { formatPokemonName } from "./formatPokemonName";
 import { getWeatherBoosted } from "./getWeatherBoosted";
 import Paginator from "./Paginator";
 import { pickTranslation } from "./pickTranslation";
@@ -32,7 +33,7 @@ function MonsterType({ type, index }: MonsterTypeProps) {
     <div
       className={classnames(
         cssType(type),
-        `type-bg-dark`,
+        "type-bg",
         "ttc tc flex",
         "pv0 ph2 lh-copy b",
         "br-pill ba border3 f6",
@@ -210,6 +211,7 @@ function Monster({ pokemon }: MonsterProps) {
   const params = new URLSearchParams({ types: pokemon.types.join(" ") });
   const speciesName = pickTranslation(pokemon.speciesNames);
   const formName = pickTranslation(pokemon.formNames);
+  const pokemonName = formatPokemonName({ speciesName, formName });
   return (
     <div className={classnames("fg1 pv3", "flex-ns items-center", "Monster")}>
       <div className="flex flex-column">
@@ -281,7 +283,7 @@ function Monster({ pokemon }: MonsterProps) {
             &nbsp;&bull;&nbsp;
           </span>
           <Link
-            aria-label={`Offense for ${speciesName} (${formName})`}
+            aria-label={`Offense for ${pokemonName}`}
             className="underline fg-link OutlineFocus"
             to={`/offense?${params}#matchup-offense`}
           >
@@ -389,6 +391,11 @@ export default function ScreenPokedex({
       <div className="flex justify-between ph2 nt2 pb3 bb border4 f6">
         <span className="fg3">Search by name, number, or types</span>
         <Link to="/pokedex/help" className="underline fg-link OutlineFocus">
+        <Link
+          to="/pokedex/help/"
+          className="underline fg-link OutlineFocus"
+          aria-label="Help, search Pokédex"
+        >
           Help
         </Link>
       </div>

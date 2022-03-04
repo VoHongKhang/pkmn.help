@@ -3,8 +3,7 @@ import { Button } from "./Button";
 import { Select } from "./Select";
 import { useLanguage } from "./useLanguage";
 import { useTheme } from "./useTheme";
-
-const year = new Date().getFullYear();
+import { useTypeCount } from "./useTypeCount";
 
 async function unregisterServiceWorker() {
   try {
@@ -38,13 +37,27 @@ const languages: Language[] = [
   { title: "Spanish", value: "es" },
 ];
 
+type TypeCountValue = "2" | "3";
+
+interface TypeCount {
+  title: string;
+  value: TypeCountValue;
+}
+
+const typeCounts: TypeCount[] = [
+  { title: "Two types (2)", value: "2" },
+  { title: "Three types (3)", value: "3" },
+];
+
+type ThemeValue = "auto" | "light" | "dark";
+
 interface Theme {
   title: string;
-  value: string;
+  value: ThemeValue;
 }
 
 const themes: Theme[] = [
-  { title: "Auto", value: "auto" },
+  { title: "System default", value: "auto" },
   { title: "Light", value: "light" },
   { title: "Dark", value: "dark" },
 ];
@@ -52,23 +65,28 @@ const themes: Theme[] = [
 export default function ScreenMore(): JSX.Element {
   const [language, setLanguage] = useLanguage();
   const [theme, setTheme] = useTheme();
+  const [typeCount, setTypeCount] = useTypeCount();
+  const year = new Date().getFullYear();
   return (
     <main className="pa3 center content-narrow lh-copy">
       <h2 className="lh-title f4">Contact Me</h2>
       <p>
-        Questions, suggestions, or just want to say thank you? Email me at{" "}
+        Hi, I&apos;m{" "}
         <a
-          className="underline fg-link OutlineFocus"
-          href="mailto:brian@wavebeem.com"
-        >
-          brian@wavebeem.com
-        </a>
-        . Source code is available on{" "}
-        <a
-          href="https://github.com/wavebeem/pkmn.help"
+          href="https://www.wavebeem.com"
           className="underline fg-link OutlineFocus"
         >
-          GitHub
+          Brian
+        </a>{" "}
+        (they/them), and I made Pokémon Type Calculator (pkmn.help).
+      </p>
+      <p>
+        Please email your thoughts and thank-yous to{" "}
+        <a
+          className="underline fg-link OutlineFocus"
+          href="mailto:pkmn@wavebeem.com"
+        >
+          pkmn@wavebeem.com
         </a>
         .
       </p>
@@ -94,6 +112,7 @@ export default function ScreenMore(): JSX.Element {
         <Select
           label="Theme"
           value={theme}
+          helpText="&ldquo;System default&rdquo; will change automatically depending on your operating system settings."
           onChange={(event) => {
             setTheme(event.target.value);
           }}
@@ -102,6 +121,22 @@ export default function ScreenMore(): JSX.Element {
             return (
               <option key={theme.value} value={theme.value}>
                 {theme.title}
+              </option>
+            );
+          })}
+        </Select>
+        <Select
+          label="Number of types"
+          value={typeCount}
+          helpText="Pokémon can briefly have three types at once if hit with Forests's Curse or Trick-or-Treat. The third type field is hidden by default since it is rarely used."
+          onChange={(event) => {
+            setTypeCount(event.target.value);
+          }}
+        >
+          {typeCounts.map((tc) => {
+            return (
+              <option key={tc.value} value={tc.value}>
+                {tc.title}
               </option>
             );
           })}
@@ -141,6 +176,18 @@ export default function ScreenMore(): JSX.Element {
         <li>Jansjo (testing, research)</li>
         <li>Several anonymous Poké Fans</li>
       </ul>
+      <div role="presentation" className="mv2 bt border3" />
+      <h2 className="lh-title f4">Open Source</h2>
+      <p>
+        Source code is available on{" "}
+        <a
+          href="https://github.com/wavebeem/pkmn.help"
+          className="underline fg-link OutlineFocus"
+        >
+          GitHub
+        </a>
+        .
+      </p>
       <div role="presentation" className="mv2 bt border3" />
       <h2 className="lh-title f4">Legal Info</h2>
       <p>

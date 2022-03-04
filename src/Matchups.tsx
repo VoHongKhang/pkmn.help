@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import {
   CoverageType,
   defensiveMatchups,
-  Effectiveness,
   GroupedMatchups,
   offensiveMatchups,
   Type,
@@ -20,7 +19,7 @@ function Badge({ type }: BadgeProps) {
   return (
     <div
       className={classNames(
-        "type-bg-dark",
+        "type-bg",
         cssType(type),
         "ba border-vibrant",
         "br2",
@@ -44,7 +43,7 @@ function Section({ title, types }: SectionProps) {
   }
   return (
     <div>
-      <h3 className="f5 mt3 mb0">{title}</h3>
+      <h2 className="f5 mt3 mb0">{title}</h2>
       <div className="mw5 center MatchupsSection-Container">
         {types.map((t) => (
           <Badge key={`type-${t}`} type={t} />
@@ -77,19 +76,20 @@ function Matchups({
     <div className="tc pt2" id={`matchup-${kind}`}>
       {kind === "offense" ? (
         <div>
-          <h3 className="f5 mt3 mb0">
+          <h2 className="f5 mt3 mb0">
             Weakness Coverage{" "}
             <span className="normal">
               (
               <Link
                 to="/offense/coverage/"
                 className="underline fg-link OutlineFocus"
+                aria-label="Edit weakness coverage"
               >
-                edit
+                Edit
               </Link>
               )
             </span>
-          </h3>
+          </h2>
           <div
             className={classNames(
               "pt1 mw5 center tc",
@@ -104,47 +104,44 @@ function Matchups({
           </div>
         </div>
       ) : null}
-      <Section
-        title={formatTitle("4×")}
-        types={matchups.typesFor(Effectiveness.QUADRUPLE)}
-      />
-      <Section
-        title={formatTitle("2×")}
-        types={matchups.typesFor(Effectiveness.DOUBLE)}
-      />
-      <Section
-        title={formatTitle("1×")}
-        types={matchups.typesFor(Effectiveness.REGULAR)}
-      />
-      <Section
-        title={formatTitle("½×")}
-        types={matchups.typesFor(Effectiveness.HALF)}
-      />
-      <Section
-        title={formatTitle("¼×")}
-        types={matchups.typesFor(Effectiveness.QUARTER)}
-      />
-      <Section
-        title={formatTitle("0×")}
-        types={matchups.typesFor(Effectiveness.ZERO)}
-      />
+      {effectivenessLevels.map((eff) => {
+        return (
+          <Section
+            key={eff}
+            title={formatTitle(displayEffectiveness[eff])}
+            types={matchups.typesFor(eff)}
+          />
+        );
+      })}
     </div>
   );
 }
 
+const effectivenessLevels = [8, 4, 2, 1, 1 / 2, 1 / 4, 1 / 8, 0];
+
+const displayEffectiveness = {
+  [8]: "8×",
+  [4]: "4×",
+  [2]: "2×",
+  [1]: "1×",
+  [1 / 2]: "½×",
+  [1 / 4]: "¼×",
+  [1 / 8]: "⅛×",
+  [0]: "0×",
+};
+
 export interface DefenseProps {
-  type1: Type;
-  type2: Type;
+  types: Type[];
   fallbackCoverageTypes: CoverageType[];
 }
 
-export function Defense({ type1, type2, fallbackCoverageTypes }: DefenseProps) {
+export function Defense({ types, fallbackCoverageTypes }: DefenseProps) {
   return (
     <Matchups
       kind="defense"
-      types={[type1, type2]}
+      types={types}
       formatTitle={(x) => `Takes ${x} From`}
-      matchups={defensiveMatchups(type1, type2)}
+      matchups={defensiveMatchups(types)}
       fallbackCoverageTypes={fallbackCoverageTypes}
       isLoading={false}
     />
