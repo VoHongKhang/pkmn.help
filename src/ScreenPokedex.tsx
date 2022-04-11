@@ -249,7 +249,7 @@ function Monster({ pokemon }: MonsterProps) {
       <div className="flex flex-column">
 
         <div className="StatsTable tabular-nums">
-          <div className="b tl">GreatLeague</div>
+          <div className="b tl">Great League</div>
           {findByDex(DataPvpGL, pokemon.number)}
         </div>
         <div className="StatsTable tabular-nums">
